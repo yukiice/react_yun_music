@@ -94,4 +94,10 @@ font-size:12px;
         border:1px solid #fff;
     }
 }
+.login{
+    cursor:pointer;
+    &:hover{
+        color:#eee;
+    }
+}
 `

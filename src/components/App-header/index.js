@@ -32,7 +32,7 @@ export default memo(function AppFooter() {
                 <HeaderRight>
                     <Input className="search" placeholder="音乐/视频/电台" prefix={<SearchOutlined />}></Input>
                     <div className="center">创作者中心</div>
-                    <div>登录</div>
+                    <div className="login">登录</div>
                 </HeaderRight>
             </div>
             <div className="divider">

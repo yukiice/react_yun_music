@@ -1,16 +1,19 @@
 import './App.less';
 import './assets/css/base.css'
+import { renderRoutes } from 'react-router-config'
+import { HashRouter } from "react-router-dom";
+import routes from './router'
 import AppFooter from './components/App-footer';
 import AppHeader from './components/App-header';
 
 
 function App() {
   return (
-    <div>
+    <HashRouter>
       <AppHeader></AppHeader>
-      <div>Content</div>
+      {renderRoutes(routes)}
       <AppFooter></AppFooter>
-    </div>
+    </HashRouter>
   );
 }
 

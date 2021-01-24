@@ -1,30 +1,46 @@
-import React, { memo, useEffect } from 'react'
-import { connect } from "react-redux";
-import { changeBannersAction } from "./store/actionCreators";
-
-
-function Recommend(props) {
-    const {getBanners,topBanners} = props;
-    useEffect(() => {
-        getBanners();
-    }, [getBanners])
+import React, { memo} from 'react'
+// 组件
+import TopBanner from './components/TopBanners/TopBanners'
+import HotRecommend from './components/HotRecommend'
+import {RecommendWrapper,Content,RecommendLeft,RecommendRight} from './style'
+import NewAlbum from './components/NewAlbum'
+import Ranking from './components/Ranking'
+function Recommend() {
+    // const {getBanners,topBanners} = props;
+    // const { topBanners } = useSelector(state => ({
+    //     topBanners: state.recommend.get('topBanners')
+    // }))
+    // const dispatch = useDispatch()
+    // useEffect(() => {
+    //     dispatch(changeBannersAction)
+    // }, [dispatch])
     return (
-        <div>
-        {
-            topBanners.length
-        }
-        </div>
+        <RecommendWrapper>
+            {/* {
+                topBanners.length
+            } */} 
+            <TopBanner></TopBanner>
+        <Content>
+            <RecommendLeft>
+                <HotRecommend></HotRecommend>
+                <NewAlbum></NewAlbum>
+                <Ranking></Ranking>
+            </RecommendLeft>
+            <RecommendRight></RecommendRight>
+        </Content>
+        </RecommendWrapper>
     )
 }
 
-const mapStateToProps = state => ({
-    topBanners: state.recommend.topBanners
-})
+export default memo(Recommend)
+// const mapStateToProps = state => ({
+//     topBanners: state.recommend.topBanners
+// })
 
-const mapDispatchToProps = dispatch => ({
-    getBanners() {
-        dispatch(changeBannersAction)
-    }
-})
+// const mapDispatchToProps = dispatch => ({
+//     getBanners() {
+//         dispatch(changeBannersAction)
+//     }
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Recommend))
+// export default connect(mapStateToProps, mapDispatchToProps)(memo(Recommend))

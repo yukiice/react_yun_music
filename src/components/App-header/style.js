@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import iconBg  from "@/assets/img/sprite_01.png"
 export const HeaderWrapper = styled.div`
 height: 75px;
 width: 100%;
@@ -44,7 +44,7 @@ display:flex;
           content: "";
           width: 28px;
           height: 19px;
-          background-image: url(${require("@/assets/img/sprite_01.png")});
+          background-image: url(${iconBg});
           background-position: -190px 0;
           top: 20px;
           right: -10px;

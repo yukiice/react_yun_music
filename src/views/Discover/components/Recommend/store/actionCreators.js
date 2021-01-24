@@ -1,11 +1,11 @@
-import { CHANGE_TOP_BANNERS, GET_NEW_ALBUM, GET_HOT_RECOMMENDS } from "./constants";
+import * as actionTypes from './constants'
 
-import { getTopBanners, getHotRecommends, getNewAlbums } from "@/api/recommend";
+import { getTopBanners, getHotRecommends, getNewAlbums, getTopList } from "@/api/recommend";
 
 
 // 首页轮播图
-export const getTopBannersAction = (topBanners) => ({
-    type: CHANGE_TOP_BANNERS,
+const getTopBannersAction = (topBanners) => ({
+    type: actionTypes.CHANGE_TOP_BANNERS,
     topBanners
 })
 
@@ -20,8 +20,8 @@ export const changeBannersAction = (dispatch) => {
 
 
 // 热门数据
-export const getHotRecommendsAction = (hotRecommends) => ({
-    type: GET_HOT_RECOMMENDS,
+const getHotRecommendsAction = (hotRecommends) => ({
+    type: actionTypes.GET_HOT_RECOMMENDS,
     hotRecommends
 })
 export const changeHotRecommendsAction = (
@@ -37,8 +37,9 @@ export const changeHotRecommendsAction = (
     }
 )
 
-export const getAlbumsAction = (albums) => ({
-    type: GET_NEW_ALBUM,
+// 新碟上架
+const getAlbumsAction = (albums) => ({
+    type: actionTypes.GET_NEW_ALBUM,
     albums
 })
 export const changeAlbumsAction = (dispatch) => {
@@ -51,6 +52,53 @@ export const changeAlbumsAction = (dispatch) => {
     })
 
 }
+
+
+// 热门列表
+
+
+
+const getUpRankingAction = (upList) => ({
+    type: actionTypes.CHANGE_UP_RANKING,
+    upList
+})
+const getNewRankingAction = (newList) => ({
+    type: actionTypes.CHANGE_NEW_RANKING,
+    newList
+})
+const getOriginalRankingAction = (originalList) => ({
+    type: actionTypes.CHANGE_ORIGINAL_RANKING,
+    originalList
+})
+
+
+export const changeTopListAction = (idxs) => {
+    return dispatch => {
+        getTopList({
+            idx: idxs
+        }).then(res => {
+            switch (idxs) {
+                case 0:
+                    dispatch(getUpRankingAction(res.playlist))
+                    break;
+                case 2:
+                    dispatch(getNewRankingAction(res.playlist))
+                    break;
+                case 3:
+                    dispatch(getOriginalRankingAction(res.playlist))
+                    break;
+                default:
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+}
+
+
+
+
+
 
 
 

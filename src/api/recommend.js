@@ -15,7 +15,7 @@ export function getHotRecommends(params){
         params
     })
 }
-
+// 新碟上架
 export function getNewAlbums(params) {
     return request({
       url: "/top/album",
@@ -23,3 +23,10 @@ export function getNewAlbums(params) {
     })
   }
 
+// 热门列表
+export function getTopList(params){
+    return request({
+        url:'/top/list',
+        params,
+    })
+}

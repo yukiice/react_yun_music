@@ -15,3 +15,11 @@ export function getHotRecommends(params){
         params
     })
 }
+
+export function getNewAlbums(params) {
+    return request({
+      url: "/top/album",
+      params
+    })
+  }
+

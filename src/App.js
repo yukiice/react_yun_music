@@ -5,6 +5,7 @@ import { HashRouter } from "react-router-dom";
 import routes from './router'
 import AppFooter from './components/App-footer';
 import AppHeader from './components/App-header';
+import AudioPlay from './components/Audio-Play';
 
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
       <AppHeader></AppHeader>
       {renderRoutes(routes)}
       <AppFooter></AppFooter>
+      {/* 自定义播放组件 */}
+      <AudioPlay></AudioPlay>
     </HashRouter>
   );
 }

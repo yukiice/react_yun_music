@@ -9,8 +9,10 @@ import { changeSongDetailAction } from "./store/actionCreators";
 export default memo(function AudioPlay() {
     const [currentTime, setCurrentTime] = useState(0)
     const [progress, setProgress] = useState(0)
+    const [duration,setDuration] = useState(0)
     const [isChange, setIsChange] = useState(false)
     const [isPlay, setIsPlay] = useState(false)
+    
     const { currentSong } = useSelector(state => ({
         currentSong: state.player.get('currentSong')
     }), shallowEqual)
@@ -24,7 +26,6 @@ export default memo(function AudioPlay() {
 
 
     // 对数据进行处理
-    const duration = currentSong[0] && currentSong[0].dt
     const showDuration = formatDate(duration, "mm:ss")
     const showCurrentTime = formatDate(currentTime, "mm:ss")
 
@@ -33,9 +34,10 @@ export default memo(function AudioPlay() {
     // 第一次进来后获得音乐数据
     useEffect(() => {
         audioRef.current.src = getPlaySong(currentSong[0] && currentSong[0].id)
+        setDuration(currentSong[0] && currentSong[0].dt)
     }, [currentSong])
 
-
+ 
 
 
     // 播放音乐
@@ -45,30 +47,30 @@ export default memo(function AudioPlay() {
     }, [isPlay])
 
     // 时间更新
-    const timeUpdate = (e) => {
+    const timeUpdate = useCallback((e) => {
         !isChange && (
-            setProgress(currentTime / duration * 100) &&
-            setCurrentTime(e.target.currentTime * 1000)
+            setCurrentTime(e.target.currentTime * 1000) &&
+            setProgress(currentTime / duration * 100) 
         )
-    }
+    },[currentTime,duration,isChange])
 
 
 
     const slideChange = useCallback((value) => {
+        setProgress(value)
         // 处理时间
         const nowTimes = value / 100 * duration
         setCurrentTime(nowTimes)
-        setProgress(value)
-
-
+        setIsChange(true)
     }, [duration])
     const slideAfterChange = useCallback((value) => {
-
+        
         const nowTimes = value / 100 * duration / 1000
         audioRef.current.currentTime = (nowTimes)
         setCurrentTime(nowTimes * 1000)
         setIsChange(false)
         !isPlay && playMusic()
+        
     }, [duration, isPlay, playMusic])
     return (
         <PlaybarWrapper className="sprite_player">

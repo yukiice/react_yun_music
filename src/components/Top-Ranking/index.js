@@ -5,6 +5,11 @@ import { getSizeImage } from "@/common/common";
 export default memo(function TopRanking(props) {
     const {info}  =props
     const {tracks = []} = info
+
+    // 点击后播放
+    const playMusic = ()=>{
+        console.log('aaaa');
+    }
     return (
         <TopRankingWrapper>
             <div className="header">
@@ -31,7 +36,7 @@ export default memo(function TopRanking(props) {
                             <div className="info">
                             <span className="name text-nowrap">{item.name}</span>
                             <div className="operate">
-                            <button className="btn sprite_02 play"></button>
+                            <button className="btn sprite_02 play" onClick={playMusic}></button>
                             <button className="btn sprite_icon2 addto"></button>
                             <button className="btn sprite_02 favor"></button>
                             </div>
